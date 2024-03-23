@@ -67,4 +67,4 @@ If Player Wins, then Computer Loses. (You Won!)
 
 If Computer Wins, then Player Loses. (You Lost!) 
 
-Win Strategy (0 (1) (2) (3) (5)  (6 ) ( ) )
+Win Strategy is not necessary , Computer to choose at random
