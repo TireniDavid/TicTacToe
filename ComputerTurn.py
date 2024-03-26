@@ -13,11 +13,9 @@ def computer_turn(listChoice, listPosition, ComputerPositionCatalog):
         time.sleep(1)
         print(f"REMAINING:  {listPosition}")
         time.sleep(1)
-        ComputerPositionCatalog.append(computerPositionChoice)
-        print(f"Computer_catalog: {ComputerPositionCatalog}")
-        time.sleep(1.5)
-        ComputerPositionCatalog.sort()
-        print(f"Computer_catalogSORTED: {ComputerPositionCatalog}")
+        ComputerPositionCatalog[computerPositionChoice] = True
+
+
     else:
         computerPositionChoice = random.choice(listPosition)
         time.sleep(1)
@@ -26,10 +24,6 @@ def computer_turn(listChoice, listPosition, ComputerPositionCatalog):
         time.sleep(1)
         print(f"REMAINING:  {listPosition}")
         time.sleep(1)
-        ComputerPositionCatalog.append(computerPositionChoice)
-        print(f"Computer_catalog: {ComputerPositionCatalog}")
-        time.sleep(1.5)
-        ComputerPositionCatalog.sort()
-        print(f"Computer_catalogSORTED: {ComputerPositionCatalog}")
+        ComputerPositionCatalog[computerPositionChoice] = True
         return
 

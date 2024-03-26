@@ -14,27 +14,18 @@ def human_turn(listChoice, listPosition, HumanPositionCatalog):
             user_input = list(User_input_letter_position)
             letter_choice = user_input[0].upper()
             position = int(user_input[1])
-        playerLetterChoice = listChoice.remove(letter_choice)
-        playerPositionChoice = listPosition.remove(position)
+        listChoice.remove(letter_choice)
+        listPosition.remove(position)
         time.sleep(1)
         print(f"REMAINING:  {listPosition}")
-        time.sleep(1)
-        HumanPositionCatalog.append(position)
-        print(f"Human_catalog: {HumanPositionCatalog}")
         time.sleep(1.5)
-        HumanPositionCatalog.sort()
-        print(f"Human_catalogSORTED:  {HumanPositionCatalog}")
+        HumanPositionCatalog[position] = True
     else:
         position = int(input("(You Chose a letter choice, Now choose from available positions: "))
         playerPositionChoice = listPosition.remove(position)
         time.sleep(1)
         print(f"REMAINING:  {listPosition}")
-        HumanPositionCatalog.append(position)
-        time.sleep(1)
-        print(f"Human_catalog: {HumanPositionCatalog}")
-        time.sleep(1.5)
-        HumanPositionCatalog.sort()
-        print(f"Human_catalogSORTED:  {HumanPositionCatalog}")
+        HumanPositionCatalog[position] = True
         return
 
 
