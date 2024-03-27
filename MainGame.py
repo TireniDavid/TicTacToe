@@ -48,6 +48,7 @@ while len(listPosition) > 0:
         if WinOrLose.win(ComputerPositionCatalog, winPossibilities):
             print('You Lost')
             break
-
+else:
+    print('Draw')
 print(HumanPositionCatalog)
 print(ComputerPositionCatalog)

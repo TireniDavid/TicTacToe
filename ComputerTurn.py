@@ -8,7 +8,7 @@ def computer_turn(listChoice, listPosition, ComputerPositionCatalog):
         computerLetterChoice = (listChoice.pop())
         computerPositionChoice = random.choice(listPosition)
         time.sleep(1)
-        print("Computer Choice: " + computerLetterChoice, str(computerPositionChoice))
+        print(f"Computer Choice: {computerLetterChoice}, {computerPositionChoice}")
         listPosition.remove(computerPositionChoice)
         time.sleep(1)
         print(f"REMAINING:  {listPosition}")
