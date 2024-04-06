@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}
+Choice Page
+{% endblock %}
+{% block content %}
+    <div class="choice-container">
+        <h1>Choose Either: </h1>
+        <div class="XandO-container">
+            <a href={{ 'game' }}><div class="X-container"><h3>X</h3></div></a>
+            <a href={{ 'game' }}><div class="O-container"><h3>O</h3></div></a>
+        </div>
+    </div>
+
+{% endblock %}
