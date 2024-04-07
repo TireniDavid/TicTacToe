@@ -134,4 +134,20 @@ body {
 }
 
 
+.x {
+    background-image: url("/static/x-letter.png");
+    background-size: contain;
+    width: 140px;
+    height: 140px;
+}
+
+.o {
+    background-image: url("/static/o-letter.png");
+    background-size: contain;
+    width: 140px;
+    height: 140px;
+}
+
+
+
 
