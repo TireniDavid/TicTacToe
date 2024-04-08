@@ -1,9 +1,9 @@
 ###############
 import time
 
-import ComputerTurn
-import HumanTurn
-import WinOrLose
+import txt_based_ComputerTurn
+import text_based_HumanTurn
+import text_based_WinOrLose
 
 listPosition = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 listChoice = ["X", "O"]

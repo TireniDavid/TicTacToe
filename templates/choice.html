@@ -6,9 +6,17 @@ Choice Page
     <div class="choice-container">
         <h1>Choose Either: </h1>
         <div class="XandO-container">
-            <a href={{ 'game' }}><div class="X-container"><h3>X</h3></div></a>
-            <a href={{ 'game' }}><div class="O-container"><h3>O</h3></div></a>
+            <a href="{{ url_for('game', symbol='x') }}">
+                <div class="X-container">
+                    <h3>X</h3>
+                </div>
+            </a>
+            <a href="{{ url_for('game', symbol='o') }}">
+                <div class="O-container">
+                    <h3>O</h3>
+                </div>
+            </a>
         </div>
     </div>
-
+    <script src="/static/script1.js"></script>
 {% endblock %}
