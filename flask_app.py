@@ -1,4 +1,5 @@
-import time
+
+
 
 import ComputerTurn
 import HumanTurn
@@ -6,21 +7,21 @@ import WinOrLose
 
 from flask import Flask, render_template, jsonify, request
 
-app = Flask(__name__)
+web_app = Flask(__name__)
 
 
-@app.route("/")
-@app.route("/home")
+@web_app.route("/")
+@web_app.route("/home")
 def home():
     return render_template('home.html')
 
 
-@app.route("/choice")
+@web_app.route("/choice")
 def choice():
     return render_template('choice.html')
 
 
-@app.route("/game", methods=['GET'])
+@web_app.route("/game", methods=['GET'])
 def game():
     return render_template('game.html')
 
@@ -46,7 +47,7 @@ HumanPositionCatalog = {0: False, 1: False,
 listPosition = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
 
-@app.route("/update_user_move", methods=['POST'])
+@web_app.route("/update_user_move", methods=['POST'])
 def update_user_move():
     if request.method == "POST":
         # Get the JSON data
@@ -63,8 +64,10 @@ def update_user_move():
         HumanTurn.human_turn(cell_pos, HumanPositionCatalog)
         if WinOrLose.win(HumanPositionCatalog, winPossibilities):
             print('You Won')
-            return 'You Won', 200
-        print(HumanPositionCatalog)
+            Win_Status = {
+                'win_status': "You Won"
+            }
+            return jsonify(Win_Status), 200
 
         # remove position from the list
         listPosition.remove(cell_pos)
@@ -75,28 +78,31 @@ def update_user_move():
         return 'Method not allowed', 405
 
 
-@app.route("/send_computer_move", methods=['GET'])
+@web_app.route("/send_computer_move", methods=['GET'])
 def send_computer_move():
     # computer turn
     # computer to choose randomly from the available slots
     computer_choice = ComputerTurn.computer_turn(listPosition, ComputerPositionCatalog)
-    if WinOrLose.win(ComputerPositionCatalog, winPossibilities):
-        print('You Lost')
 
     # reflect computer's choice in the database
     listPosition.remove(computer_choice)
     print(computer_choice)
-    print(ComputerPositionCatalog)
     print(f"REMAINING:  {listPosition}")
 
     # prepare to send computer's data to the front-end
     computer_data = {
         'computerPositionChoice': computer_choice
     }
-
+    if WinOrLose.win(ComputerPositionCatalog, winPossibilities):
+        computer_data['Win_Status'] = 'You Lost'
+        print('You Lost')
     # Return Computer's move in JSON format
     return jsonify(computer_data), 200
 
 
+
+
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    web_app.run(debug=True)
