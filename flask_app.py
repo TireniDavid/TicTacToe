@@ -1,6 +1,6 @@
 
 
-
+import endGame
 import ComputerTurn
 import HumanTurn
 import WinOrLose
@@ -62,16 +62,17 @@ def update_user_move():
         # human turn
         # change human info database
         HumanTurn.human_turn(cell_pos, HumanPositionCatalog)
-        if WinOrLose.win(HumanPositionCatalog, winPossibilities):
-            print('You Won')
-            Win_Status = {
-                'win_status': "You Won"
-            }
-            return jsonify(Win_Status), 200
 
         # remove position from the list
         listPosition.remove(cell_pos)
-        print(listPosition)
+
+        if WinOrLose.win(HumanPositionCatalog, winPossibilities):
+            print("Win")
+            send_win_status(status='You Win')
+            send_game_over_status()
+
+        elif endGame.endGame(listPosition):
+            send_game_over_status()
 
         return 'User Moved Processed Successfully', 200
     else:
@@ -86,21 +87,35 @@ def send_computer_move():
 
     # reflect computer's choice in the database
     listPosition.remove(computer_choice)
-    print(computer_choice)
-    print(f"REMAINING:  {listPosition}")
 
     # prepare to send computer's data to the front-end
-    computer_data = {
+    computer_move = {
         'computerPositionChoice': computer_choice
     }
+    # check game over
     if WinOrLose.win(ComputerPositionCatalog, winPossibilities):
-        computer_data['Win_Status'] = 'You Lost'
-        print('You Lost')
-    # Return Computer's move in JSON format
-    return jsonify(computer_data), 200
+        print("sent win")
+        send_win_status(status='You Lost')
+        print("sent gameover")
+        #//send_game_over_status()
 
+    elif endGame.endGame(listPosition):
+        print("sent gameover without win")
+        #//send_game_over_status()
 
+    print("sent computer move")
+    return jsonify(computer_move), 200
 
+@web_app.route("/send_game_over_status", methods = ['GET'])
+def send_game_over_status():
+    data = {
+        'game_over_status': True
+    }
+    return jsonify(data), 200
+
+def send_win_status(status):
+    data = {'Win_status': status}
+    return jsonify(data), 200
 
 
 
